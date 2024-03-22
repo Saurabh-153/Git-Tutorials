@@ -1,0 +1,88 @@
+### **Example 1: worktree**
+
+Suppose you are working on a project in the **`master`** branch and you want to fix a bug on a different branch, say **`bugfix`**, without leaving your work on **`master`**. You can use **`git worktree`** to create a new working directory for the **`bugfix`** branch:
+
+```bash
+
+git worktree add ../bugfix-branch bugfix
+
+```
+
+This command will create a new directory named **`bugfix-branch`** at the same level as your current repository directory. Inside **`bugfix-branch`**, the **`bugfix`** branch will be checked out. You can now work on the **`bugfix`** branch in the **`bugfix-branch`** directory and on the **`master`** branch in your original directory simultaneously.
+
+### **Advantages:**
+
+1. **Context Switching**: Easily switch contexts by working in different branches without the need to stash or commit current changes.
+2. **CI/CD or Testing**: Test changes in one branch while continuing development in another.
+3. **Code Reviews**: Review code in one worktree while working on something else in another.
+
+---
+
+### **Example 2: rebase —onto**
+
+Imagine you have a feature branch called **`feature`** that was branched off from **`develop`**. But you realize that it should have been based on a different branch, say **`experiment`**. You can use **`git rebase --onto`** to change the base of your **`feature`** branch from **`develop`** to **`experiment`**.
+
+Here's how you might do it:
+
+```bash
+git rebase --onto experiment develop feature
+
+```
+
+In this example:
+
+- **`experiment`** is the new base you want your **`feature`** branch commits to be on.
+- **`develop`** is the old base where the **`feature`** branch was originally branched off.
+- **`feature`** is the branch you're rebasing.
+
+---
+
+### **Example 3 : —fixup**
+
+1. **Initial Commit**:
+    - You create a new feature and commit it.
+    - Let's say the commit hash of this commit is **`abc123`**.
+    - Commit message: **`"Add new feature"`**
+2. **Realizing the Mistake**:
+    - After the commit, you notice you forgot to add a new function in your feature.
+3. **Fixing the Mistake with Fixup**:
+    - You write the missing function and stage the changes using **`git add`**.
+    - Instead of just committing normally, you use **`git commit --fixup`** to mark this commit as a fix for the previous one:
+        
+        ```bash
+        
+        git commit --fixup=abc123
+        ```
+
+4. **Cleaning Up with Autosquash**:
+    - Now, it's time to integrate this fix into the original commit.
+    - You start an interactive rebase, including the original commit and the fixup commit. Let's assume there are 5 commits above the one you want to fix:
+        
+        ```bash
+        
+        git rebase -i --autosquash HEAD~6
+        
+        ```
+        
+    - Git will automatically reorder the commits and mark the fixup commit to be squashed with the original commit.
+    - The interactive rebase interface will open in your text editor, showing something like:
+        
+        ```sql
+        
+        pick abc123 Add new feature
+        fixup def456 fixup! Add new feature
+        
+        ```
+        
+    - Save and close the editor to start the rebase.
+5. **Result**:
+    - After the rebase is complete, the changes from your fixup commit are integrated into the original commit.
+    - The commit history now looks clean, as if the feature was committed correctly the first time.
+6. **Force Push (if Necessary)**:
+    - If you had already pushed the original commit to a remote repository, you'll need to force push your changes:
+bashCopy code
+git push --force
+
+
+​
+Remember, force pushing can rewrite history in the remote repository, so it should be done with caution.
