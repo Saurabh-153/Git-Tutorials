@@ -1,0 +1,105 @@
+# git config
+
+---
+
+### **User Information**
+
+- **`user.name`**: Your name, typically used in commit messages.
+    
+    ```bash
+    git config --global user.name "Your Name"
+    ```
+    
+- **`user.email`**: Your email address, also used in commit messages.
+    
+    ```bash
+    
+    git config --global user.email "your_email@example.com"
+    ```
+    
+
+### **Editor and Diff Tool**
+
+- **`core.editor`**: Sets the default text editor for Git.
+    
+    ```bash
+    
+    git config --global core.editor "code --wait"
+    ```
+    
+- **`diff.tool`**: Specifies the diff tool to use.
+    
+    ```bash
+    
+    git config --global diff.tool vimdiff
+    
+    ```
+    
+
+### **Aliases**
+
+- Create shortcuts for common commands.
+```bash
+git config --global alias.st status
+git config --global alias.ci commit
+```
+
+### **Branch Behavior**
+
+- **`branch.autosetuprebase`**: Automatically set up rebase for newly created branches.
+    
+    ```bash
+    
+    git config --global branch.autosetuprebase always
+    
+    ```
+    
+
+### **Push Behavior**
+
+- **`push.default`**: Configures the default behavior of **`git push`**.
+    
+    ```bash
+    
+    git config --global push.default current
+    ```
+    
+
+### **Pull Behavior**
+
+- **`pull.rebase`**: Determines how **`git pull`** integrates changes.
+    
+    ```bash
+    
+    git config --global pull.rebase false
+    ```
+    
+
+### **Credential Storage**
+
+- **`credential.helper`**: Configure how Git handles credentials.
+    
+    ```bash
+    
+    git config --global credential.helper cach
+    ```
+Log Formatting
+Custom formatting for git log.
+
+git config --global format.pretty oneline
+
+​
+Merge Conflict Style
+merge.conflictstyle: Set the style of conflict markers and metadata in unresolved merge conflicts.
+
+git config --global merge.conflictstyle diff3
+
+​
+Hooks
+Custom scripts that run at specific points in Git's execution process.
+git config --global core.hooksPath /path/to/hooks
+
+Networking
+http.proxy / https.proxy: Specify a proxy for HTTP/HTTPS operations.
+
+git config --global http.proxy proxy-url
