@@ -1,0 +1,74 @@
+1. **`git init`**: Initializes a new Git repository. This command creates a new **`.git`** directory in your project, enabling Git version control for it.
+2. **`git clone [url]`**: Creates a copy of an existing repository from a URL. It's used to download and copy the repository to your local machine.
+3. **`git add [file]`**: Adds files to the staging area. It's used to include the changes of specified files into the next commit.
+4. **`git commit -m "[commit message]"`**: Saves your changes to the local repository. The **`m`** flag allows you to add a commit message inline.
+5. **`git status`**: Displays the state of the working directory and staging area. It lets you see which changes have been staged, which haven’t, and which files aren’t being tracked by Git.
+6. **`git push [remote] [branch]`**: Pushes the changes from your local repository to a remote repository. The **`[remote]`** is typically **`origin`**, and **`[branch]`** is the branch name.
+7. **`git pull [remote]`**: Fetches and merges changes from the remote server to your working directory.
+8. **`git branch`**: Lists all the branches in your repo. Add a branch name after the command to create a new branch.
+9. **`git checkout [branch-name]`**: Switches to the specified branch and updates the working directory.
+10. **`git merge [branch]`**: Merges the specified branch’s history into the current branch.
+11. **`git diff`**: Shows the file differences which are not yet staged.
+12. **`git reset [file]`**: Unstages the specified file, but it preserves the file contents.
+13. **`git log`**: Displays the chronological commit history for the current branch.
+14. **`git fetch [remote]`**: Downloads all changes from the remote, but doesn’t integrate any of these new commits into your working files.
+15. **`git rm [file]`**: Deletes a file from your working directory and stages the deletion.
+16. **`git stash`**: Temporarily stores all modified tracked files.
+17. **`git stash pop`**: Restores the most recently stashed files.
+18. **`git remote -v`**: Lists all the configured remotes.
+19. **`git rebase [branch]`**: Applies your branch commits one by one on top of the specified branch.
+20. **`git tag [tag-name]`**: Used to tag specific points in history as important, typically used for marking release points (e.g., **`v1.0.1`**).
+
+*******************************************************************************************
+
+1. **`git rebase -i HEAD~[number]`**: Interactive rebasing allows you to modify commits in a number of ways such as rewriting, squashing, and reordering commits. This is powerful for cleaning up your commit history before merging a feature branch.
+2. **`git cherry-pick [commit-hash]`**: This command is used to apply the changes introduced by some existing commits to the current branch. It's useful for applying specific commits from one branch to another.
+3. **`git reflog`**: Shows a log of changes to the local repository's HEAD. It's incredibly useful for recovering from complicated situations, like a hard reset.
+4. **`git reset --hard HEAD~[number]`**: Undoes commits and discards all changes. This is a destructive action and should be used with care.
+5. **`git revert [commit-hash]`**: Creates a new commit that undoes the changes made in the specified commit. Unlike **`git reset`**, it doesn't alter the existing history.
+6. **`git stash branch [new-branch-name]`**: Creates a new branch from your current state and applies your stashed changes to it. This is helpful when the current branch has moved on, and your stash doesn't apply cleanly anymore.
+7. **`git log --graph --oneline --decorate --all`**: Displays an ASCII graph of the branch and merge history beside the log output, giving a visual representation of your commits.
+8. **`git fetch --prune`**: Cleans up remote-tracking branches that no longer exist on the remote.
+9. **`git remote rename [old-name] [new-name]`**: Renames a remote connection.
+10. **`git worktree add [path] [branch]`**: Allows you to check out multiple branches simultaneously by creating multiple working trees connected to the same repository.
+11. **`git blame [file]`**: Shows what revision and author last modified each line of a file. It's great for exploring the history of a file.
+12. **`git submodule add [url] [path]`**: Adds a new submodule to your project, which is a repository embedded inside your main repository.
+13. **`git archive --format=zip --output=[file.zip] [branch]`**: Creates an archive (zip file, for example) of the repository.
+14. **`git revert HEAD`**: Reverts the most recent commit, creating a new commit that undoes it.
+15. **`git commit --amend`**: Modifies the most recent commit. This is useful for making changes to the last commit and/or modifying the commit message.
+16. **`git reset --soft HEAD~[number]`**: Soft resets to a previous commit, keeping all changes in the staging area.
+17. **`git filter-branch`**: Offers a variety of advanced options for rewriting history, such as changing author names, email addresses, or editing commit messages in bulk.
+
+*******************************************************************************************
+
+1. **`git rebase --onto [newbase] [oldbase] [branch]`**: This allows for complex rebasing operations. For example, you can rebase a part of a branch onto a different base commit. It's useful for scenarios like extracting a feature branch that was based on one branch but should have been based on another.
+2. **`git reflog`**: While I've mentioned it before, it's worth emphasizing its importance. The reflog is a record of where your HEAD and branch references have been. It can be a lifesaver for recovering "lost" commits, especially after complex history rewrites.
+3. **`git submodule update --remote --merge`**: If you're using submodules, this command will fetch and merge the latest changes for all submodules. This is useful in a project with multiple dependencies.
+4. **`git log --grep=[pattern]`**: Searches commit messages for a specified pattern. This is invaluable when you're looking for changes related to a specific topic.
+5. **`git commit --fixup=[commit]` / `git rebase -i --autosquash`**: This pair is useful for cleaning up your history. The **`-fixup`** flag creates a commit to fix a previous commit, and **`-autosquash`** with interactive rebase automatically orders and squashes these fixup commits.
+6. **`git push --force-with-lease`**: A safer alternative to **`git push --force`**, it ensures you don't overwrite others' work by mistake. It checks that the remote branch hasn't advanced before pushing.
+7. **`git add -p`**: Allows you to interactively select chunks of content and stage them. This is great for breaking up large changes into smaller commits.
+8. **`git show [commit]:[file]`**: Shows the content of a file at a specific commit. This is really helpful when you want to view the state of a file at a certain point in history.
+9. **`git fetch --all`**: Fetches all remotes and their branches. This is essential when working with multiple remotes.
+10. **`git merge --no-ff`**: Creates a merge commit even if a fast-forward merge is possible. This ensures the history of feature branch merges is preserved.
+11. **`git stash show -p stash@{[index]}`**: Shows the changes recorded in a specific stash as a diff. It's useful when you have multiple stashes and need to find a specific one.
+12. **`git clean -fd`**: Removes untracked files and directories. Be careful with this command, as it will permanently delete these files.
+13. **`git blame -L [start],[end] [file]`**: Shows who modified each line of a file within a specified range of lines. This is useful for understanding changes in a specific section of a file.
+14. **`git log --follow [file]`**: Shows the commits that changed a file, even across renames. This is crucial for tracking the history of a file that has been moved or renamed.
+
+************************************************************************************************
+
+1. **`git rebase --interactive --root`**: Allows you to rebase all commits back to the initial commit. This is extremely powerful and risky, as it lets you rewrite the entire history of your branch.
+2. **`git filter-branch`**: A versatile tool for rewriting history. It can be used for operations like removing a file from the entire history, changing email addresses in commit messages, and more. Note that this command can be destructive.
+3. **`git submodule foreach --recursive [command]`**: Executes a Git command in each of the registered submodules. The **`-recursive`** flag ensures that it applies to submodules within submodules as well.
+4. **`git log --since="2 weeks ago" --author=[author]`**: Shows commits by a specific author within a certain timeframe. This is useful for generating reports or audits.
+5. **`git blame -w`**: The **`w`** flag ignores whitespace changes, which is useful for finding the original contributor of a line when the file has undergone formatting changes.
+6. **`git archive --format=tar --prefix=project/ HEAD | gzip >` project.tar.gz`**: Creates a compressed archive of the current HEAD.
+7. **`git worktree prune`**: Cleans up worktree references that are no longer valid in your repository.
+8. **`git reflog expire --expire=now --all` & `git gc --prune=now`**: This combination of commands can be used to clean up and remove orphaned objects in your Git repository. Useful for reducing repository size, but be cautious as it's destructive.
+9. **`git cherry`**: Compares the current branch with a branch specified, showing which commits in HEAD are not in the other branch.
+10. **`git rerere` (reuse recorded resolution)**: Helps by remembering how you resolved a hunk in a merge conflict and applying it automatically next time Git sees the same conflict.
+11. **`git commit --squash=[commit]` & `git rebase -i --autosquash`**: Similar to **`-fixup`**, but used when you want to squash changes into a commit without amending it directly.
+12. **`git add --patch` or `git add -p`**: Allows you to interactively select parts of files to commit, which is great for splitting large changes into smaller commits.
+13. **`git show-branch --all`**: Shows the commits on all branches.
+14. **`git push --delete [remote] [branch]`**: Deletes a remote branch.
